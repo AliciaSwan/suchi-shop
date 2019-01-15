@@ -11,8 +11,14 @@ class MenuWidget extends Widget
     public function run(){
         $this->data = new Category();
         $this->data = $this->data->getCategories();
-        return $this->data['0']['cat_name'];
+        $this->data = $this->categoryToTemplate($this->data);
+        return $this->data;
+    }
 
+    public function categoryToTemplate($data){
+        ob_start();
+        include __DIR__.'/template/menu.php';
+        return ob_get_clean();
     }
 
 }

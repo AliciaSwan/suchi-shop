@@ -18,7 +18,7 @@ class Products extends ActiveRecord
     {
         return 'products';
     }
-    public function GetAllProducts(){
+    public function getAllProducts(){
         $products = Yii::$app->cache->get('products');
         if(!$products){
             $products = Products::find()->asArray()->all();
@@ -27,4 +27,20 @@ class Products extends ActiveRecord
 
         return $products;
     }
+    public function getProductsCategories($id){
+        $catProducts = Yii::$app->cache->get('catProducts');
+        if(!$catProducts){
+            $catProducts = Products::find()->where(['category'=>$id])->asArray()->all();
+            Yii::$app->cache->set('catProducts', $catProducts, 20);
+        }
+
+        return $catProducts;
+    }
+
+    public function getSearchResults($search){
+        $searchResults = Products::find()->where(['like', 'name', $search])->asArray()->all();
+        return $searchResults;
+    }
+
+
 }

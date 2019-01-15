@@ -1,10 +1,12 @@
 
-<?= \app\widgets\MenuWidget::widget()?>
 
 <div class="container">
-        <div class="row">
+    <h2 style="text-align: center">Результаты поиска по запросу "<?=\yii\helpers\Html::encode($search) ?>"</h2>
+    <div class="row justify-content-center">
 
-            <?php foreach ($products as $product) { ?>
+        <?php
+        if ($products){
+        foreach ($products as $product) { ?>
             <div class="col-4">
                 <div class="product">
                     <div class="product-img">
@@ -19,6 +21,8 @@
                     </div>
                 </div>
             </div>
-            <?php } ?>
-        </div>
+        <?php }} else{ ?>
+            <h4>По Вашему запросу ничего не найдено :(</h4>
+       <?php }?>
+    </div>
 </div>

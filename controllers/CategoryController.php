@@ -15,8 +15,22 @@ class CategoryController extends Controller
 {
     public function actionIndex(){
         $products = new Products();
-        $products = $products->GetAllProducts();
+        $products = $products->getAllProducts();
         return $this->render('index', compact('products'));
+    }
+
+    public function actionView($id){
+        $products = new Products();
+        $products = $products->getProductsCategories($id);
+        return $this->render('view', compact('products'));
+    }
+
+    public function actionSearch(){
+        $search = \Yii::$app->request->get('search');
+        $products = new Products();
+        $products = $products->getSearchResults($search);
+        return $this->render('search', compact('products', 'search'));
+
     }
 
 }

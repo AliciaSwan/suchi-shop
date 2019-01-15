@@ -2,9 +2,9 @@
 <?= \app\widgets\MenuWidget::widget()?>
 
 <div class="container">
-        <div class="row">
+    <div class="row justify-content-center">
 
-            <?php foreach ($products as $product) { ?>
+        <?php foreach ($products as $product) { ?>
             <div class="col-4">
                 <div class="product">
                     <div class="product-img">
@@ -19,6 +19,6 @@
                     </div>
                 </div>
             </div>
-            <?php } ?>
-        </div>
+        <?php } ?>
+    </div>
 </div>
