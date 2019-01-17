@@ -28,14 +28,14 @@ class Products extends ActiveRecord
         return $products;
     }
     public function getProductsCategories($id){
-        $catProducts = Yii::$app->cache->get('catProducts');
+        $catProducts = Yii::$app->cache->get("catProducts{$id}");
         if(!$catProducts){
             $catProducts = Products::find()->where(['category'=>$id])->asArray()->all();
-            Yii::$app->cache->set('catProducts', $catProducts['id'], 20);
+            Yii::$app->cache->set("catProducts{$id}", $catProducts, 20);
         }
-
         return $catProducts;
     }
+
     public function getOneProduct($name){
         return Products::find()->where(['link_name'=>$name])->one();
     }
