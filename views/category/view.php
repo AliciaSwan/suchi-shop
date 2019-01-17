@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 ?>
 <?php
-$this->title = 'Суши-Шоп | '.$id['browser_name'];
+$this->title = 'Суши-Шоп | '.$products[0]['cat_rus'];
 ?>
 
 <div class="container">
