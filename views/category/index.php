@@ -1,5 +1,11 @@
 
-<?= \app\widgets\MenuWidget::widget()?>
+<?= \app\widgets\MenuWidget::widget();
+use yii\helpers\Url;
+?>
+<?php
+$this->title = 'Суши-Шоп. Сеть магазинов Суши на заказ';
+?>
+
 
 <div class="container">
         <div class="row">
@@ -14,8 +20,8 @@
                     <div class="product-descr">Состав: <?= $product['composition'] ?></div>
                     <div class="product-price">Цена: <?= $product['price'] ?> рублей</div>
                     <div class="product-buttons">
-                        <button type="button" class="product-button__add btn btn-success">Заказать</button>
-                        <button type="button" class="product-button__more btn btn-primary">Подробнее</button>
+                        <a href="#" data-name="<?=$product['link_name'] ?>" type="button" class="product-button__add btn btn-success">Заказать</a>
+                        <a href="<?=Url::to(['product/index', 'name'=>$product['link_name']])?>" type="button" class="product-button__more btn btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>

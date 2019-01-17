@@ -51,6 +51,7 @@ $config = [
             'rules' => [
 
                 'category/<id>' => 'category/view',
+                'product/<name>' => 'product/index',
                 'search/' => 'category/search',
 
             ],
