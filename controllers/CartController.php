@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\models\Order;
 use app\models\Products;
 use yii\web\Controller;
 use app\models\Cart;
@@ -16,6 +17,39 @@ use Yii;
 
 class CartController extends Controller
 {
+    public function actionOrder(){
+        $session = Yii::$app->session;
+        $session->open();
+        $order = new Order();
+        if($order ->load(Yii::$app->request->post())){
+            $order->date = date('Y-m-d H:m:s');
+            $order->sum = $session['cart.totalSum '];
+            if($order->save()){
+                $session->remove('cart');
+                $session->remove('cart.totalQuantity');
+                $session->remove('cart.totalSum');
+                return $this->render('succes');
+            }
+        }
+        $this->layout = 'empty-layout';
+        return $this->render('order', compact( 'session', 'order'));
+    }
+    public function actionDelete($id){
+        $session = Yii::$app->session;
+        $session->open();
+        $cart = new Cart();
+        $cart->recalcCart($id);
+        return $this->renderPartial('cart', compact( 'session'));
+    }
+    public function actionClear(){
+        $session = Yii::$app->session;
+        $session->open();
+        $session->remove('cart');
+        $session->remove('cart.totalQuantity');
+        $session->remove('cart.totalSum');
+        return $this->renderPartial('cart', compact( 'session'));
+    }
+
     public  function actionOpen() {
         $session = Yii::$app->session;
         $session->open();
