@@ -23,8 +23,13 @@ class CartController extends Controller
         $order = new Order();
         if($order ->load(Yii::$app->request->post())){
             $order->date = date('Y-m-d H:m:s');
-            $order->sum = $session['cart.totalSum '];
+            $order->sum = $session['cart.totalSum'];
             if($order->save()){
+                Yii::$app->mailer->compose()
+                    ->setFrom(['info@suchi-shop.ru' => 'Test Test'])
+                    ->setTo( 'admin@suchi-shop.ru')
+                    ->setSubject('Ваш заказ принят')
+                    ->send();
                 $session->remove('cart');
                 $session->remove('cart.totalQuantity');
                 $session->remove('cart.totalSum');

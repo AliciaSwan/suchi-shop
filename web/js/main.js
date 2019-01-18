@@ -39,6 +39,11 @@ function clearCart(event){
             type: 'GET',
             success: function (res) {
                 $('#cart .modal-content').html(res);
+                if($('.total-quantity').html()){
+                    $('.menu-quantity').html('('+ $('.total-quantity').html()+')');
+                }else{
+                    $('.menu-quantity').html('(0)');
+                }
             },
             error: function () {
                 alert('error');
